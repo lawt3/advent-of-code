@@ -32,12 +32,12 @@ func chop(s string, n int) (string, string) {
 }
 
 func main() {
-	stacks := make([]string, 9)
+	stacks := make([]string, 3)
 	var moves []move
 
 	state := readStacks
 
-	lines := strings.Split(input, "\n")
+	lines := strings.Split(sample, "\n")
 	for _, line := range lines {
 		fmt.Println("current line", line)
 		switch state {
@@ -66,16 +66,15 @@ func main() {
 	}
 
 	for _, m := range moves {
-		// for i := 0; i < m.n; i++ {
-		// 	c, rest := pop(stacks[m.src])
-		// 	stacks[m.dst] = c + stacks[m.dst]
-		// 	stacks[m.src] = rest
-		// }
+		for i := 0; i < m.n; i++ {
+			c, rest := pop(stacks[m.src])
+			stacks[m.dst] = c + stacks[m.dst]
+			stacks[m.src] = rest
+		}
 
-		fmt.Println(m)
-		xs, rest := chop(stacks[m.src], m.n)
-		stacks[m.dst] = xs + stacks[m.dst]
-		stacks[m.src] = rest
+		// xs, rest := chop(stacks[m.src], m.n)
+		// stacks[m.dst] = xs + stacks[m.dst]
+		// stacks[m.src] = rest
 	}
 
 	for _, s := range stacks {
